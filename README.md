@@ -16,4 +16,7 @@ EOF
 - AIRFLOW_UID controls which user Airflow's containers use when writing files into directories mounted from your Mac. The official Airflow tutorial creates .env with an AIRFLOW_UID for its Docker Compose setup
 - FERNET_KEY: Airflow uses Fernet encryption to encrypt sensitive values such as connection passwords and variables stored in its metadata database.
 
-See the `.env.example` file
+See the `.env.example` file.
+
+
+The demo API packages a snapshot of the processed dataset into the container image. A production implementation would use persistent/shared storage or an external data store instead.

@@ -1,0 +1,17 @@
+.venv/
+.git/
+.gitignore
+
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+airflow/logs/
+airflow/.env
+
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+
+.DS_Store

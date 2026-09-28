@@ -4,7 +4,7 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
-PROCESSED_DATA_PATH = "/Users/orestisbastas/Developer/local-data-platform-lab/data/processed"
+PROCESSED_DATA_PATH = "data/processed"
 PROCESSED_SUMMARY = "orders_summary.json"
 
 
