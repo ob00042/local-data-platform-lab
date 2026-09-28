@@ -1,7 +1,8 @@
-import app.main as main
-from fastapi.testclient import TestClient
 import json
 
+from fastapi.testclient import TestClient
+
+import app.main as main
 
 client = TestClient(main.app)
 
@@ -39,15 +40,11 @@ def test_summary(tmp_path, monkeypatch) -> None:
         tmp_path,
     )
 
-    monkeypatch.setattr(
-        main,
-        "PROCESSED_SUMMARY",
-        summary_name
-    )
+    monkeypatch.setattr(main, "PROCESSED_SUMMARY", summary_name)
 
     response = client.get("/summary")
     assert response.status_code == 200
-    
+
     body = response.json()
 
     assert body["paid_orders"] == 7
@@ -63,11 +60,7 @@ def test_summary_no_file(tmp_path, monkeypatch) -> None:
         tmp_path,
     )
 
-    monkeypatch.setattr(
-        main,
-        "PROCESSED_SUMMARY",
-        summary_name
-    )
+    monkeypatch.setattr(main, "PROCESSED_SUMMARY", summary_name)
 
     response = client.get("/summary")
 

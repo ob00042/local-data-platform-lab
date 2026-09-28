@@ -1,14 +1,10 @@
 import json
 from pathlib import Path
+from typing import TypedDict
 
 import pandas as pd
 import pendulum
 from airflow.sdk import dag, task
-
-# from dataclasses import dataclass, asdict
-from typing import TypedDict
-
-
 
 DATA_DIR = Path("/opt/airflow/data")
 RAW_PATH = DATA_DIR / "raw" / "orders.csv"
@@ -36,11 +32,10 @@ class OrdersPipelineTransformOut(TypedDict):
 def orders_pipeline():
 
     @task
-    def extract()-> list[dict]:
+    def extract() -> list[dict]:
         df = pd.read_csv(RAW_PATH)
 
         return df.to_dict(orient="records")
-
 
     @task
     def transform(rows: list[dict]) -> OrdersPipelineTransformOut:
@@ -50,22 +45,18 @@ def orders_pipeline():
         total_sales = paid["amount"].sum()
 
         by_country_list = []
-        
 
         for country, country_sales in paid.groupby("country"):
             by_country = {
-                "country": country, 
-                "order_count": country_sales.shape[0], 
-                "total_sales": country_sales["amount"].sum()
+                "country": country,
+                "order_count": country_sales.shape[0],
+                "total_sales": country_sales["amount"].sum(),
             }
             by_country_list.append(by_country)
 
         return OrdersPipelineTransformOut(
-            paid_orders=number_paid_orders,
-            total_paid_sales=total_sales,
-            by_country=by_country_list
+            paid_orders=number_paid_orders, total_paid_sales=total_sales, by_country=by_country_list
         )
-
 
     @task
     def load(summary: OrdersPipelineTransformOut) -> None:
@@ -83,9 +74,9 @@ def orders_pipeline():
 
         print(f"Wrote summary to {OUTPUT_PATH}")
 
-
     rows = extract()
     summary = transform(rows)
     load(summary)
+
 
 orders_pipeline()
