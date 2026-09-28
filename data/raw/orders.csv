@@ -1,0 +1,11 @@
+order_id,customer,country,amount,status
+1,Ada,GR,120.50,paid
+2,Linus,FI,80.00,paid
+3,Grace,US,200.00,cancelled
+4,Guido,NL,150.00,paid
+5,Margaret,US,110.00,paid
+6,Ken,US,95.00,paid
+7,Barbara,US,130.00,refunded
+8,James,CA,75.00,paid
+9,Frances,US,210.00,paid
+10,Donald,US,90.00,cancelled
