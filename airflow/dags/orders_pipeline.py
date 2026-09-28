@@ -22,8 +22,8 @@ class ByCounty(TypedDict):
 
 
 class OrdersPipelineTransformOut(TypedDict):
-    number_paid_orders: int
-    total_sales: float
+    paid_orders: int
+    total_paid_sales: float
     by_country: list[ByCounty]
 
 
@@ -61,8 +61,8 @@ def orders_pipeline():
             by_country_list.append(by_country)
 
         return OrdersPipelineTransformOut(
-            number_paid_orders=number_paid_orders,
-            total_sales=total_sales,
+            paid_orders=number_paid_orders,
+            total_paid_sales=total_sales,
             by_country=by_country_list
         )
 
